@@ -1,0 +1,309 @@
+/* Global Styles for the Application */
+
+/* Variables */
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$background-color: #f5f5f5;
+$border-color: #ddd;
+$text-color: #333;
+$font-family: 'Helvetica Neue', sans-serif;
+
+/* Mixins */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property, $duration) {
+  transition: $property $duration ease-in-out;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $text-color;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: $primary-color;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $text-color;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.p-2 {
+  padding: 2rem;
+}
+
+/* Containers */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  @include transition(all, 0.3s);
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card-header {
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  padding: 1rem 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: $primary-color;
+  border-radius: 5px;
+  @include transition(all, 0.3s);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &--secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+}
+
+/* Input Styles */
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  @include transition(border-color, 0.3s);
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}
+
+/* Form Validation */
+input.is-invalid, textarea.is-invalid {
+  border-color: red;
+
+  &:focus {
+    border-color: darkred;
+  }
+}
+
+.form-error {
+  color: red;
+  font-size: 0.875rem;
+}
+
+/* Header */
+.header {
+  background-color: $primary-color;
+  color: #fff;
+  padding: 1rem 0;
+
+  .header__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .header__nav {
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+      margin-left: 2rem;
+      color: #fff;
+
+      &:hover {
+        color: lighten($secondary-color, 20%);
+      }
+    }
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: darken($primary-color, 5%);
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+
+  a {
+    color: #fff;
+    font-weight: bold;
+
+    &:hover {
+      color: lighten($secondary-color, 20%);
+    }
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: $background-color;
+  border-right: 1px solid $border-color;
+  width: 250px;
+  padding: 2rem;
+  height: 100vh;
+
+  .sidebar__menu {
+    margin-bottom: 2rem;
+
+    a {
+      display: block;
+      padding: 0.75rem 0;
+      color: $text-color;
+      font-weight: bold;
+      @include transition(color, 0.3s);
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+/* Dashboard Grid */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+}
+
+.dashboard__content {
+  padding: 2rem;
+}
+
+/* Notifications */
+.notification {
+  padding: 1rem;
+  border: 1px solid $primary-color;
+  background-color: lighten($primary-color, 40%);
+  color: $primary-color;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+
+  &--error {
+    border-color: red;
+    background-color: lighten(red, 40%);
+    color: red;
+  }
+
+  &--success {
+    border-color: $secondary-color;
+    background-color: lighten($secondary-color, 40%);
+    color: $secondary-color;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header__nav {
+    flex-direction: column;
+
+    a {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0;
+  }
+
+  .header {
+    text-align: center;
+  }
+}

@@ -1,0 +1,110 @@
+app:
+  name: Stripe Clone Development
+  environment: development
+  port: 5000
+
+database:
+  host: localhost
+  port: 5432
+  name: stripe_clone_dev
+  user: dev_user
+  password: dev_password
+  driver: postgresql
+  pool_size: 10
+  timeout: 30
+
+jwt:
+  secret_key: "secretdevelopmentkey"
+  algorithm: HS256
+  expiration_seconds: 3600
+
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  password: ""
+
+payment:
+  stripe:
+    api_key: "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+    webhook_secret: "whsec_1234567890abcdef"
+    currency: USD
+
+  paypal:
+    client_id: "paypal-client-id"
+    client_secret: "paypal-client-secret"
+    webhook_id: "paypal-webhook-id"
+
+  transaction:
+    timeout_seconds: 120
+
+billing:
+  invoice:
+    tax_rate: 0.08
+    reminder_days: 7
+
+logging:
+  level: DEBUG
+  format: "[%(asctime)s] %(levelname)s in %(module)s: %(message)s"
+  log_file: logs/development.log
+
+security:
+  encryption_key: "development-encryption-key"
+  ssl_enabled: false
+
+monitoring:
+  prometheus:
+    host: localhost
+    port: 9090
+  logging:
+    enabled: true
+
+oauth:
+  google:
+    client_id: "google-client-id"
+    client_secret: "google-client-secret"
+    redirect_uri: "http://localhost:5000/auth/google/callback"
+
+  facebook:
+    client_id: "facebook-client-id"
+    client_secret: "facebook-client-secret"
+    redirect_uri: "http://localhost:5000/auth/facebook/callback"
+
+fraud_detection:
+  rule_based:
+    enabled: true
+    thresholds:
+      high_risk: 80
+      medium_risk: 50
+
+  ml_detection:
+    model_path: "/models/fraud_detection_model.pkl"
+    enabled: false
+
+notifications:
+  email:
+    smtp_server: smtp.mailtrap.io
+    smtp_port: 2525
+    username: "mailtrap-username"
+    password: "mailtrap-password"
+    from_email: "noreply@website.com"
+
+  sms:
+    provider: twilio
+    account_sid: "twilio-account-sid"
+    auth_token: "twilio-auth-token"
+    from_number: "+1234567890"
+
+performance:
+  cache:
+    redis:
+      ttl_seconds: 600
+    memory_cache_size: 1024
+
+deployment:
+  kubernetes:
+    enabled: false
+  auto_scaling:
+    enabled: true
+    min_instances: 2
+    max_instances: 10

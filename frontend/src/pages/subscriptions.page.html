@@ -1,0 +1,33 @@
+<div class="subscription-container">
+    <h1>Manage Subscriptions</h1>
+  
+    <div *ngIf="isLoading" class="loading">
+      <mat-spinner></mat-spinner>
+      <p>Loading subscriptions...</p>
+    </div>
+  
+    <div *ngIf="!isLoading && subscriptions.length === 0" class="no-subscriptions">
+      <p>No active subscriptions found.</p>
+    </div>
+  
+    <div *ngIf="!isLoading && subscriptions.length > 0" class="subscriptions-list">
+      <div *ngFor="let subscription of subscriptions" class="subscription-card">
+        <h2>{{ subscription.planName }}</h2>
+        <p><strong>Status:</strong> {{ subscription.status }}</p>
+        <p><strong>Next Billing Date:</strong> {{ formatEndDate(subscription.nextBillingDate) }}</p>
+        <p><strong>Amount:</strong> {{ subscription.amount | currency:subscription.currencyCode }}</p>
+  
+        <button mat-button color="primary" *ngIf="isSubscriptionActive(subscription)" (click)="viewSubscriptionDetails(subscription.id)">
+          View Details
+        </button>
+  
+        <button mat-button color="warn" *ngIf="isSubscriptionActive(subscription)" (click)="cancelSubscription(subscription.id)">
+          Cancel Subscription
+        </button>
+  
+        <button mat-button color="accent" *ngIf="isSubscriptionActive(subscription)" (click)="updateSubscription(subscription.id, 'new-plan-id')">
+          Change Plan
+        </button>
+      </div>
+    </div>
+  </div>  

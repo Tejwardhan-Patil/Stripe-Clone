@@ -1,0 +1,105 @@
+# Environment settings
+environment: production
+debug: false
+
+# Application settings
+app:
+  port: 8080
+  host: 0.0.0.0
+  allowed_hosts:
+    - website.com
+    - api.website.com
+
+# Database configuration
+database:
+  type: postgresql
+  host: db.website.com
+  port: 5432
+  name: prod_db
+  user: prod_user
+  password: secure_password
+  pool_size: 20
+  timeout: 3000
+
+# Cache settings
+cache:
+  type: redis
+  host: cache.website.com
+  port: 6379
+  ttl: 600  # Time to live for cached data (in seconds)
+
+# Logging configuration
+logging:
+  level: error
+  file: /var/log/app/prod.log
+  rotate:
+    size: 10MB
+    backups: 5
+  format: "[%(asctime)s] %(levelname)s: %(message)s"
+
+# Security settings
+security:
+  cors:
+    allowed_origins:
+      - https://website.com
+      - https://api.website.com
+  csrf_protection: true
+  session_timeout: 3600  # Session timeout in seconds
+  encryption_key: "encryption_key"
+
+# Payment Gateway Configurations
+payment_gateways:
+  stripe:
+    api_key: "sk_live_1234567890"
+    webhook_secret: "whsec_live_1234567890"
+  paypal:
+    client_id: "live_client_id"
+    client_secret: "live_client_secret"
+
+# Email service configuration
+email:
+  smtp_server: smtp.mailgun.org
+  smtp_port: 587
+  smtp_user: postmaster@website.com
+  smtp_password: smtp_password
+  from_address: no-reply@website.com
+
+# JWT settings
+jwt:
+  secret_key: "jwt_secret_key"
+  algorithm: HS256
+  access_token_expiry: 3600  # Token expiry time in seconds
+  refresh_token_expiry: 86400
+
+# Monitoring and Performance settings
+monitoring:
+  prometheus_enabled: true
+  prometheus_port: 9090
+
+performance:
+  load_balancer:
+    enabled: true
+    nginx_config: /nginx/nginx.conf
+
+# Fraud detection configuration
+fraud_detection:
+  rule_based_threshold: 0.75
+  ml_model:
+    model_path: /opt/fraud_detection/model_v2.pkl
+    detection_threshold: 0.85
+
+# Billing and invoicing
+billing:
+  tax_rate: 0.15
+  invoice_prefix: "INV-"
+  billing_cycle: monthly
+
+# Notification services
+notifications:
+  email_enabled: true
+  sms_enabled: false
+
+# API Rate Limiting
+rate_limiting:
+  requests_per_minute: 100
+  burst_limit: 200
